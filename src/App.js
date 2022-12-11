@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import './DataTable.scss';
+import Sidebar from './Compenents/Sidebar';
+import { Route, Routes } from 'react-router-dom';
+import Overview from './Pages/Overview';
+import Details from './Pages/Details';
+import Product from './Pages/Product';
+import ProductList from './Pages/ProductList';
+import Dashboard from './Pages/Dashboard'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Sidebar>
+      <Routes>
+          <Route path="/" element={<Overview />} />
+          <Route path="#" element={<Dashboard />} />
+          <Route path="/overview" element={<Overview />} />
+          <Route path="/my_details" element={<Details/>} />
+          <Route path="#" element={<Product />} />
+          <Route path="#" element={<ProductList />} /> 
+        </Routes>
+      </Sidebar>
+
+  )
 }
 
-export default App;
+export default App
+
+
+
+

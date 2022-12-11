@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+/****** sytling the  */
+.outline_two{
+    outline: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.slider__item {
+    max-width: 100%;
+    height: 650px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  .slider__item-01 {
+    background: url('http://unblast.com/wp-content/uploads/2018/08/Gradient-Mesh-2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 240px;
+    top: 0px;
   }
-  to {
-    transform: rotate(360deg);
+
+
+
+  
+  label {
+    color: var(--heading-color);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
   }
-}
+  
+  .form__group div {
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+  }
+  
+  .form__group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form__group div input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid #b7ffe913;
+    color: var(--heading-color);
+    font-size: 1rem;
+  }
+  
+  .form__group div input::placeholder {
+    color: var(--small-text-color);
+    font-size: 0.9rem;
+  }
+  
+  .form__group div input:focus {
+    outline: none;
+  }
+  
