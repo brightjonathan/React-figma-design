@@ -1,11 +1,16 @@
-import {useState} from 'react';
-import { NavLink } from 'react-router-dom'; 
+import {useState, useEffect} from 'react';
+import { NavLink, Link, useNavigate } from 'react-router-dom'; 
 import { analytics, burly, dashboard, overview, people, product, producttwo, profile, setting } from './Icons';
-import about from '../Assest/Img/about_us.jpg'
+//import about from '../Assest/Img/about_us.jpg';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { BiLogOutCircle } from 'react-icons/bi'
+import { auth } from "../Firebase-config";
+import {signOut} from 'firebase/auth';
 
-const NarBar = ({children}) => {
+const NarBar = ({ children, isAuth, setisAuth, setuser }) => {
 
     const [open, setopen] = useState(true);
+    const navigate = useNavigate();
 
     const Menus=[
         {
@@ -13,19 +18,19 @@ const NarBar = ({children}) => {
             name:"Dashboard",
             icon: dashboard
         },
+        // {
+        //     path:"/overview",
+        //     name:"Overview",
+        //     icon: overview
+        // },
         {
-            path:"/overview",
-            name:"Overview",
-            icon: overview
-        },
-        {
-            path:"/my_details",
-            name:"my details",
+            path:"/birth_registration",
+            name:"Birth ",
             icon: profile
         },
         {
-            path:"#",
-            name:"analytics",
+            path:"/certificate",
+            name:"certificate",
             icon: analytics,
         },
         {
@@ -33,25 +38,38 @@ const NarBar = ({children}) => {
             name:"Product",
             icon:product,
         },
-        {
-            path:"#",
-            name:"checked",
-            icon: producttwo
-        },
+        // {
+        //     path:"#",
+        //     name:"checked",
+        //     icon: producttwo
+        // },
     
-        {
-            path:"#",
-            icon: burly,
-            gap: true
-        },
+        // {
+        //     path:"#",
+        //     icon: burly,
+        //     gap: true
+        // },
 
-        {
-            path:"#",
-            name:"setting",
-            icon: setting,
-        },
+        // {
+        //     path:"#",
+        //     name:"setting",
+        //     icon: setting,
+        // },
         
     ];
+
+
+       //sign out functionality...
+  const logOut = () =>{
+    if (window.confirm('ARE YOU SURE YOU WANT TO LOG OUT FROM YOUR ACCOUNT ?')){
+      signOut(auth).then(()=>{
+      localStorage.clear();
+      setuser(null);
+      setisAuth(false);
+      navigate('/login');
+    })
+    }
+  };
     
 
   return (
@@ -68,7 +86,7 @@ const NarBar = ({children}) => {
        alt='logo'
        className={`cursor-pointer duration-500 ${open && 'rotate-[360deg]'}`}
        />
-       <h1  className={`text-white origin-left font-medium text-xl duration-200 ${ !open && "scale-0" }`}> Untitled Ul </h1>
+       <h1  className={`text-white origin-left font-medium text-xl duration-200 ${ !open && "scale-0" }`}> Birth Ul </h1>
       </div>
 
       <ul className="pt-6">
@@ -88,10 +106,29 @@ const NarBar = ({children}) => {
             </NavLink>
           ))}
 
+         { /* 
           <div className=' ml-4  mt-3 items-center '>
             <div className='pr-2'><img src={about} alt='images' className=' w-12 h-12 rounded-full'/></div>
-            {/* <h4>Tofunmi sojimi </h4> */}
-          </div>
+            <h4>Tofunmi sojimi </h4>
+          </div> */ }
+
+          {/* <div className=' ml-3  mt-[25vh] text-gray-300'>
+            <button> Login </button> 
+             
+            <div className='mt-2'>
+            <button onClick={logOut}> Signout </button>
+            </div>
+              
+          </div> */}
+
+
+  { !isAuth ? 
+  (  <Link to='/login'><button className='bg-[#0F172A] p-2 rounded text-[10px text-white ml-3  mt-[25vh]  hover:bg-[#1F2937] duration-500'> Login </button> </Link> ) 
+  : ( <button onClick={logOut} className='bg-[#0F172A] p-2 rounded text-[10px] text-white ml-3  mt-[25vh]  hover:bg-[#1F2937] duration-500'> SignOut </button> 
+  )}
+
+          
+            
 
         </ul>
       </div>
